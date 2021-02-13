@@ -87,12 +87,13 @@ set history=50
 set cursorline
 set t_Co=16
 set scrolloff=8
-set background=dark
 set iskeyword+=-,_,%
 set wildmenu
 set wildmode=full
 
+set background=dark
 colorscheme  spacecamp
+hi MatchParen ctermbg=none ctermfg=red
 
 "自动命令
 au BufNewFile *.c,*.s call Sethead()
@@ -103,6 +104,7 @@ nnoremap <F1> :NERDTreeMirror<CR>
 nnoremap <F1> :NERDTreeToggle<CR>
 nnoremap <F2> :vs $MYVIMRC<CR>
 nnoremap <F4> :set hls!<CR>
+inoremap <leader>j <c-r>=strftime("%Y-%m-%d")<cr>
 inoremap <leader><leader> <C-w>
 nnoremap <leader><leader> daw
 nnoremap <leader>d vapd
@@ -132,6 +134,8 @@ func! Gcc()
         exec "!as % -g -o %<.o --32"
         exec "!ld %<.o -o %<.exe -m elf_i386"
         exec "!./%<.exe"
+    elseif &filetype=='markdown' 
+        exec "!google-chrome %"
     elseif &filetype=='pic' 
         exec "!pic % | groff | ps2eps > %<.es"
         exec "!pic % | groff | ps2eps > %<.pdf"
