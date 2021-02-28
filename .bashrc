@@ -126,3 +126,8 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias ls='ls --color=auto'
+# go alias
+alias gr='go run'
+alias gmi='go mod init'
+alias ls='ls -F --group-directories-first --color=auto'
+eval `dircolors $HOME/.config/dircolors.moonshine`
