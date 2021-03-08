@@ -72,10 +72,11 @@ set foldmarker={{{,}}}
 set foldclose=
 set background=dark
 colorscheme  spacecamp
-hi MatchParen ctermbg=none ctermfg=red
+hi MatchParen ctermbg=none ctermfg=green cterm=bold,underline,nocombine
 au BufNewFile *.c,*.s,*.go  call Sethead()
-
-set fillchars=fold:\ 
+set statusline=%<%F%h%m%r%=%b\ 0x%B\ \ %l,%c%V
+set laststatus=2
+set fillchars=fold:+
 set foldtext=substitute(getline(v:foldstart),'\"\\\|/\\*\\\|\\*/\\\|{\{{\\d\\=','','g')
 "}}}
 
@@ -106,7 +107,6 @@ nnoremap k                  gk
 inoremap (                  ()<ESC>i
 inoremap [                  []<ESC>i
 inoremap "                  ""<ESC>i
-inoremap {                  {}<ESC>i
 inoremap '                  ''<ESC>i
 inoremap <silent><leader>j  <c-r>=strftime("%Y-%m-%d")<cr>
 inoremap <TAB>              <C-R>=SkipPair()<CR>
@@ -123,9 +123,9 @@ func! Gcc()
         exec "!time ./%<"
 
     elseif &filetype=='asm' 
-        exec "!as % -g -o %<.o --32"
-        exec "!ld %<.o -o %<.exe -m elf_i386"
-        exec "!./%<.exe"
+        exec "!as % -o %<.o --32"
+        exec "!ld %<.o -o %< -m elf_i386"
+        exec "!./%<"
 
     elseif &filetype=='markdown' 
         silent let l:a = system ("google-chrome ". expand('%'))
@@ -144,6 +144,7 @@ func! SkipPair()
                 \ getline('.')[col('.') - 1] == '}' ||
                 \ getline('.')[col('.') - 1] == '"' ||
                 \ getline('.')[col('.') - 1] == "'" ||
+                \ getline('.')[col('.') - 1] == ";" ||
                 \ getline('.')[col('.') - 1] == ">" 
         return "\<ESC>la"
     else

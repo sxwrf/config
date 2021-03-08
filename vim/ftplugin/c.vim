@@ -3,11 +3,17 @@ nnoremap <leader><leader>c vapk:s/^/\/\/<CR>
 nnoremap <leader><leader>b vapk:s/\/\//<CR>
 nnoremap <leader>c 0i//<ESC>
 nnoremap <leader>b :s/\/\//<CR><ESC>
-inoremap ## /* */<ESC>F s
+inoremap ## /*  */<ESC>F i
+inoremap ,  , 
+inoremap for  for (;;){<CR>}<ESC>kf(a
+inoremap while  while (){<CR>}<ESC>kf(a
+inoremap if  if ()<ESC>i
+inoremap #i #include <.h><ESC>F.i
+inoremap =  <SPACE>=<SPACE>
+inoremap ==   <SPACE>==<SPACE>
+inoremap !=   <SPACE>!=<SPACE>
+inoremap +=   <SPACE>+=<SPACE>
 
-iabbrev #< #include <><ESC>h
-iabbrev #i #include "<ESC>
-iabbrev #d #define 
 
 func! Sethead()
     let b:numline=0
@@ -17,7 +23,8 @@ func! Sethead()
     let b:numline+=1 | call setline(b:numline,"")
     let b:numline+=1 | call setline(b:numline, "#include <stdio.h>")
     let b:numline+=1 | call setline(b:numline, "")
-    let b:numline+=1 | call setline(b:numline, "int main(){")
+    let b:numline+=1 | call setline(b:numline, "int main()")
+    let b:numline+=1 | call setline(b:numline, "{")
     let b:numline+=1 | call setline(b:numline, "")
     let b:numline+=1 | call setline(b:numline, "}")
     normal gg=G

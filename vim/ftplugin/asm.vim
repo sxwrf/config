@@ -3,6 +3,7 @@ nnoremap <leader><leader>b vapk:s/#/<CR>
 nnoremap <leader>c 0i#<ESC>
 nnoremap <leader>b 0x<ESC>
 inoremap ## #{{{<ESC>o#}}}<ESC>?#<CR>na
+let b:ale_linters = ['gcc']
 
 iabbrev of movl $5, %eax<CR>movl $miaoshufu, %ebx<CR>movl $0, %ecx<CR>movl $0666, %edx<CR>int $0x80
 iabbrev rf movl $3, %eax<CR>movl $miaoshufu, %ebx<CR>movl $buffer, %ecx<CR>movl $len, %edx<CR>int $0x80
